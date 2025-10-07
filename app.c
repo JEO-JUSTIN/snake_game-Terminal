@@ -12,7 +12,7 @@ int f_x=0,f_y=0;
 char last='a';
 int x=X/2,y=Y/2;
 
-int snake_len=1;
+int snake_len=2;
 int snake[2][100];
 
 char board[X][Y];
@@ -39,8 +39,12 @@ void fruit()
     int lower = 2, upper = X-2;
     
     srand(time(0));
-    f_x=lower + rand() % (upper - lower + 1);
-    f_y=lower + rand() % (upper - lower + 1);
+    f_x=lower + rand() % (upper - lower + 1)-1;
+    f_y=lower + rand() % (upper - lower + 1)-1;
+    if (f_x == 0) 
+        f_x=1;
+    if (f_y ==0)
+        f_y=1;
     check_fruit();
 
     board[f_x][f_y]='@';
@@ -211,7 +215,7 @@ void handle(char c)
             right();
         }
         else{
-        
+            handle(last);
         }
 }
 int main()
@@ -247,7 +251,7 @@ int main()
         display();
         check(c);
         printf("Score: %d",snake_len);
-        Sleep(100);
+        Sleep(10);
     }
    
   
